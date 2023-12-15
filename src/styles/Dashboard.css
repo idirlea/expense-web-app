@@ -1,0 +1,12 @@
+.totals-by-category {
+  list-style: none;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+}
+
+.totals-by-category span {
+  font-size: 1rem;
+  color: #a0a0a0;
+  font-weight: 600;
+}

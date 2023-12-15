@@ -1,0 +1,114 @@
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.menu.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-btn {
+  position: absolute;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.add-btn {
+  position: absolute;
+  right: 70px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.menu button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.menu-btn span, .menu button span {
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: #000;
+  margin-bottom: 6px;
+  transition: transform 0.3s ease;
+}
+
+.menu.open button span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 8px) scale(0.8);
+}
+
+.menu.open button span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu.open button span:nth-child(3) {
+  transform: rotate(-45deg) translate(3px, -4px) scale(0.8);
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.menu.open .menu-content {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.menu-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-content ul li {
+  margin-bottom: 20px;
+}
+
+.menu-content ul li span {
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.menu-content ul li span:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,35 @@
+
+.transaction {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: space-between;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.transaction__category {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.transaction__title {
+  font-weight: bold;
+}
+
+.transaction__amount {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.transaction__currency {
+  margin-left: 5px;
+  font-size: 0.7rem;
+}
+
+.transaction .transaction__date {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+}

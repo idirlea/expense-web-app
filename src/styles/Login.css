@@ -1,0 +1,77 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 40%;
+  max-width: 400px;
+  height: 30%;
+}
+
+.login-wrapper .title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: left;
+}
+
+.login-wrapper form {
+  width: 100%;
+}
+
+.login-wrapper form input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.login-wrapper form input:focus {
+  border-color: #0077ff;
+}
+
+.login-wrapper form input.error {
+  border-color: red;
+}
+
+.login-wrapper form input::placeholder {
+  color: #2b2b2b;
+}
+
+.login-wrapper form input.error::placeholder {
+  color: red;
+}
+
+.login-wrapper form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #0077ff;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  .login-wrapper {
+    width: 80%;
+  }
+}
+
+@media screen and (orientation: landscape) and (hover: none) {
+  .login-wrapper {
+    height: 60%;
+  }
+}
