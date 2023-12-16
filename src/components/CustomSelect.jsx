@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 const CustomSelect = ({ field, form, options, defaultValue, ...props }) => {
   const { setFieldValue } = form;
   const { name, value } = field;
-  
-  console.log('defaultValue', defaultValue)
+
   const handleChange = (selectedOption) => {
     setFieldValue(name, selectedOption);
   };
@@ -21,10 +20,15 @@ const CustomSelect = ({ field, form, options, defaultValue, ...props }) => {
   );
 }
 
+CustomSelect.defaultProps = {
+  defaultValue: '',
+};
+
 CustomSelect.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   options: PropTypes.array.isRequired,
+  defaultValue: PropTypes.string,
 };
 
 export default CustomSelect;
