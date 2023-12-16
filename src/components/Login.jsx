@@ -8,6 +8,8 @@ import '../styles/Login.css';
 import axios from 'axios';
 import { redirect } from 'react-router-dom';
 
+const BASE_URL = import.meta.env.VITE_API_URL; 
+
 const Login = ({ setIsAuthenticated }) => {
   const initialValues = {
     email: '',
@@ -37,7 +39,7 @@ const Login = ({ setIsAuthenticated }) => {
   }, [setIsAuthenticated]);
 
   const handleLogin = (values) => {
-    axios.post('http://expense.code-school.eu/api/auth/local/', {
+    axios.post(BASE_URL + 'auth/local/', {
       identifier:  values.email,
       password: values.password,
     })
