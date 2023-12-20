@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 import '../styles/MobileMenu.css';
-import { FaPlus } from 'react-icons/fa';
 
-const MobileMenu = () => {
+const MobileMenu = ({ setIsAuthenticated }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showButton, setShowButton] = useState(false);
 
@@ -31,6 +32,14 @@ const MobileMenu = () => {
 
     return () => clearTimeout(timer);
   }, [isOpen]);
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.setItem('isAuthenticated', 'false');
+    localStorage.removeItem('jwt');
+
+    return navigate('/login');
+  }
 
   return (
     <>
@@ -63,12 +72,16 @@ const MobileMenu = () => {
             <li><span onClick={() => handleMenuItemClick('/add-transaction')}>Add Transaction</span></li>
             <li><span onClick={() => handleMenuItemClick('/analytics')}>Analytics</span></li>
             <li><span onClick={() => handleMenuItemClick('/settings')}>Settings</span></li>
-            <li>Log Out</li>
+            <li><span onClick={handleLogout}>Log Out</span></li>
           </ul>
         </motion.div>
       </div>
     </>
   );
 };
+
+MobileMenu.propTypes = {
+  setIsAuthenticated: PropTypes.func.isRequired
+}
 
 export default MobileMenu;

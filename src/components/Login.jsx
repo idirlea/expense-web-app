@@ -42,6 +42,11 @@ const Login = ({ setIsAuthenticated }) => {
     axios.post(BASE_URL + 'auth/local/', {
       identifier:  values.email,
       password: values.password,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      },
     })
       .then(response => {
         if (response.data.jwt) {

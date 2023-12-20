@@ -29,23 +29,23 @@ const App = () => {
         /> 
         <Route
           exact path="/" 
-          element={<PrivateRoute component={Dashboard} isAuthenticated={isAuthenticated} />} 
+          element={<PrivateRoute component={Dashboard} setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />} 
         />
         <Route
           exact path="/add-transaction" 
-          element={<PrivateRoute component={AddTransaction} isAuthenticated={isAuthenticated} />} 
+          element={<PrivateRoute component={AddTransaction} setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />} 
         />
         <Route
           exact path="/transaction-list" 
-          element={<PrivateRoute component={TransactionsList} isAuthenticated={isAuthenticated} />} 
+          element={<PrivateRoute component={TransactionsList} setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />} 
         />
         <Route
           exact path="/analytics" 
-          element={<PrivateRoute component={Analytics} isAuthenticated={isAuthenticated} />} 
+          element={<PrivateRoute component={Analytics} setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />} 
         />
         <Route
           exact path="/settings" 
-          element={<PrivateRoute component={Settings} isAuthenticated={isAuthenticated} />} 
+          element={<PrivateRoute component={Settings} setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />} 
         />
       </Routes>
     </Router>

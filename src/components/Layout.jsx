@@ -19,7 +19,7 @@ const iconStyle = {
 }
 
 
-const Layout = ({ children }) => {
+const Layout = ({ children, setIsAuthenticated }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
         >
           <FaReceipt size={28} />
         </Link>
-        {isMobile ? <MobileMenu /> : <Menu />}
+        {isMobile ? <MobileMenu setIsAuthenticated={setIsAuthenticated} /> : <Menu setIsAuthenticated={setIsAuthenticated} />}
       </header>
       <main>
         {children}
