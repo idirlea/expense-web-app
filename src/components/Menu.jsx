@@ -1,15 +1,14 @@
 import { Link, redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
+import useAuth from '../hooks/useAuth';
+
 import '../styles/Menu.css';
 
-
-const Menu = ({ setIsAuthenticated }) => {
+const Menu = () => {
+  const { logout } = useAuth();
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.setItem('isAuthenticated', 'false');
-    localStorage.removeItem('jwt');
-
+    logout()  
     redirect('/login');
   }
 
@@ -23,10 +22,6 @@ const Menu = ({ setIsAuthenticated }) => {
       </ul>
     </nav>
   )
-}
-
-Menu.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired
 }
 
 export default Menu;

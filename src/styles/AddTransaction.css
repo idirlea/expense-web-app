@@ -1,9 +1,27 @@
-.form-field {
-  display: flex;
-  flex-direction: column;
+.add-transaction-page {
+  height: calc(100vh - 60px);
 }
 
-.form-field input, .form-field select {
+.add-transaction-page form {
+  width: 100%;
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.add-transaction-page .form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.add-transaction-page .form-field label {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.add-transaction-page .form-field input, .form-field select {
   width: calc(100% - 20px);
   padding: 10px;
   margin-bottom: 10px;
@@ -14,9 +32,14 @@
   font-weight: 500;
 }
 
-.validation-message {
+.add-transaction-page .validation-message {
   color: #fff;
   font-size: 0.8rem;
   padding: 8px;
   margin-bottom: 10px;
+}
+
+.add-transaction-page button {
+  width: 100%;
+  padding: 10px;
 }

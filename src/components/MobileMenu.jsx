@@ -2,19 +2,20 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
-import PropTypes from 'prop-types';
+
+import useAuth from '../hooks/useAuth';
 
 import '../styles/MobileMenu.css';
 
-const MobileMenu = ({ setIsAuthenticated }) => {
+const MobileMenu = () => {
+  const { logout } = useAuth();
+  
   const [isOpen, setIsOpen] = useState(false);
   const [showButton, setShowButton] = useState(false);
 
   const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   const handleMenuItemClick = (to) => {
     setTimeout(() => {
@@ -34,10 +35,7 @@ const MobileMenu = ({ setIsAuthenticated }) => {
   }, [isOpen]);
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.setItem('isAuthenticated', 'false');
-    localStorage.removeItem('jwt');
-
+    logout()
     return navigate('/login');
   }
 
@@ -79,9 +77,5 @@ const MobileMenu = ({ setIsAuthenticated }) => {
     </>
   );
 };
-
-MobileMenu.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired
-}
 
 export default MobileMenu;

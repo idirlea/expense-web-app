@@ -98,3 +98,24 @@ export const getTotalByCategory = (transactions) => {
   }, {});
 }
 
+export const getMonthsTotals = (transactions) => {
+  const groupedTransactions = groupTransactionsByDate(transactions);
+
+  return Object.entries(groupedTransactions).reduce((acc, [date, transactions]) => {
+    const total = transactions.reduce((acc, transaction) => {
+      return acc + transaction.amount;
+    }, 0);
+
+    const month = format(new Date(date), 'LLL');
+    if (!acc[month]) {
+      acc[month] = 0;
+    }
+
+    acc[month] += total;
+    return acc;
+  }
+  , {});
+}
+
+
+

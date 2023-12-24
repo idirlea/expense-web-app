@@ -1,14 +1,13 @@
-import PropTypes from 'prop-types';
-import Menu from './Menu';
-
-import '../styles/Layout.css';
-
 import { useState, useEffect } from 'react';
-import MobileMenu from './MobileMenu';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { FaReceipt } from 'react-icons/fa';
 
+import Menu from './Menu';
+import MobileMenu from './MobileMenu';
+
+import '../styles/Layout.css';
 
 const iconStyle = {
   display: 'flex', 
@@ -19,7 +18,7 @@ const iconStyle = {
 }
 
 
-const Layout = ({ children, setIsAuthenticated }) => {
+const Layout = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -42,9 +41,9 @@ const Layout = ({ children, setIsAuthenticated }) => {
           style={iconStyle} 
           to="/"
         >
-          <FaReceipt size={28} />
+          <FaReceipt className='logo-icon' size={28} />
         </Link>
-        {isMobile ? <MobileMenu setIsAuthenticated={setIsAuthenticated} /> : <Menu setIsAuthenticated={setIsAuthenticated} />}
+        {isMobile ? <MobileMenu /> : <Menu />}
       </header>
       <main>
         {children}

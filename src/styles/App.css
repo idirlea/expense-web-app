@@ -3,14 +3,30 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #1a1a1a;
   border-radius: 1rem;
   padding: 1rem;
   width: calc(100% - 2.2rem);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.widget a {
+  color: #fff;
+}
+
+
 .transaction__group-date {
   font-size: 1.1rem;
   color: #a0a0a0;
+}
+
+@media (prefers-color-scheme: light) {
+  .widget {
+    background-color: #ffffff;
+  }
+
+.widget a {
+  color: #333;
+}
+
 }

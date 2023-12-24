@@ -1,16 +1,14 @@
 import { Formik, Form, Field } from 'formik';
-import { useEffect } from 'react';
-import PropTypes from 'prop-types';
-
 import CustomInput from './CustomInput';
 
 import '../styles/Login.css';
-import axios from 'axios';
-import { redirect } from 'react-router-dom';
 
-const BASE_URL = import.meta.env.VITE_API_URL; 
+import useAuth from '../hooks/useAuth';
+import { Navigate } from 'react-router-dom';
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
+  const { login, isAuth } = useAuth();
+
   const initialValues = {
     email: '',
     password: ''
@@ -30,40 +28,9 @@ const Login = ({ setIsAuthenticated }) => {
     return errors;
   };
 
-  useEffect(() => {
-    // Check if the user is already logged in (e.g., after a page refresh)
-    const loggedIn = localStorage.getItem('isAuthenticated');
-    if (loggedIn === 'true') {
-      setIsAuthenticated(true);
-    }
-  }, [setIsAuthenticated]);
-
-  const handleLogin = (values) => {
-    axios.post(BASE_URL + 'auth/local/', {
-      identifier:  values.email,
-      password: values.password,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': '*/*'
-      },
-    })
-      .then(response => {
-        if (response.data.jwt) {
-          setIsAuthenticated(true);
-          localStorage.setItem('isAuthenticated', 'true');
-          localStorage.setItem('jwt', response.data.jwt);
-
-          redirect('/');
-        }
-      })
-      .catch(error => {
-        // Handle the error
-        console.error(error);
-      });
-  };
-  
-
+  if (isAuth) {
+    return <Navigate to="/" />
+  }
 
   return (
     <div className='login-wrapper'>
@@ -72,7 +39,7 @@ const Login = ({ setIsAuthenticated }) => {
       </div>
       <Formik
         initialValues={initialValues}
-        onSubmit={handleLogin}
+        onSubmit={login}
         validate={validateForm}
       >
         <Form>
@@ -102,8 +69,5 @@ const Login = ({ setIsAuthenticated }) => {
   );
 };
 
-Login.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired
-}
 
 export default Login;

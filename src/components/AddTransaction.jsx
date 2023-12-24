@@ -5,11 +5,14 @@ import { get, post } from '../service';
 import CustomDatePicker from './CustomDatePicker';
 import CustomInput from './CustomInput';
 
+import CustomSelect from './CustomSelect';
+
 import '../styles/AddTransaction.css';
 
 const AddTransaction = () => {
   const [categories, setCategories] = useState([]);
   const [currencies, setCurrencies] = useState([]);
+  
   const [user, setUser] = useState({});
   const [validationMessage, setValidationMessage] = useState('');
   const [messageType, setMessageType] = useState('');
@@ -62,7 +65,7 @@ const AddTransaction = () => {
 
   const handleValidate = (values) => {
     const errors = {};
-    console.log(values)
+    
     if (!values.amount) {
       errors.amount = 'Required';
     } else if (values.amount < 0) {
@@ -81,7 +84,7 @@ const AddTransaction = () => {
   }
 
   return (
-    <div>
+    <div className='add-transaction-page'>
       <h2>Add Transaction</h2>
       <div className='validation-message' style={{
         display: validationMessage ? 'block' : 'none',
@@ -89,68 +92,65 @@ const AddTransaction = () => {
       }}>
         {validationMessage}
       </div>
-      <div className='widget'>
+      
         <Formik 
           initialValues={initialValues} 
           onSubmit={handleSubmit}
           validate={handleValidate}
         >
           <Form>
-            <div className='form-field'>
-              <label htmlFor="amount">Amount:</label>
-              <Field type="number" id="amount" name="amount" component={CustomInput} />
-              <ErrorMessage name="amount" component="div" />
-            </div>
+            <div className='widget'>
+              <div className='form-field'>
+                <label htmlFor="amount">Amount:</label>
+                <Field type="number" id="amount" name="amount" component={CustomInput} />
+                <ErrorMessage name="amount" component="div" />
+              </div>
 
-            <div className='form-field'>
-              <label htmlFor="currency">Currency:</label>
-              <Field 
-                as="select" 
-                id="currency" 
-                name="currency" 
-                defaultValue={user?.currency?.id}>
-                <option value="">Select Currency</option>
-                {currencies.map(currency => (
-                  <option 
-                    key={currency.id} 
-                    value={currency.id}>
-                      {currency.name}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="currency" component="div" />
-            </div>
+              <div className='form-field'>
+                <label htmlFor="currency">Currency:</label>
+                <Field 
+                  as="select" 
+                  id="currency" 
+                  name="currency" 
+                  component={CustomSelect}
+                  options={currencies.map(currency => ({
+                    value: currency.id,
+                    label: currency.name,
+                  }))}
+                  defaultValue={user?.currency?.id} 
+                />
+                <ErrorMessage name="currency" component="div" />
+              </div>
 
-            <div className='form-field'>
-              <label htmlFor="category">Category:</label>
-              <Field as="select" id="category" name="category">
-                <option value="">Select Category</option>
-                {categories.map(category => (
-                  <option 
-                    key={category.id} 
-                    value={category.id}>
-                      {category.name}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="category" component="div" />
-            </div>
+              <div className='form-field'>
+                <label htmlFor="category">Category:</label>
+                <Field 
+                  as="select" 
+                  id="category" 
+                  name="category" 
+                  component={CustomSelect} 
+                  options={categories.map(({id, name}) => ({
+                    value: id,
+                    label: name,
+                  }))} 
+                />
+                <ErrorMessage name="category" component="div" />
+              </div>
 
-            <div className='form-field'>
-              <label htmlFor="description">Description:</label>
-              <Field type="text" id="description" name="description" component={CustomInput} />
-            </div>
+              <div className='form-field'>
+                <label htmlFor="description">Description:</label>
+                <Field type="text" id="description" name="description" component={CustomInput} />
+              </div>
 
-            <div className='form-field'>
-              <label htmlFor="date">Date:</label>
-              <Field type="date" id="date" name="date" component={CustomDatePicker} />
+              <div className='form-field'>
+                <label htmlFor="date">Date:</label>
+                <Field type="date" id="date" name="date" component={CustomDatePicker} />
+              </div>
             </div>
-
             <button type="submit">Add Expense</button>
           </Form>
         </Formik>
-      </div>  
-    </div>
+      </div>
   );
 };
 

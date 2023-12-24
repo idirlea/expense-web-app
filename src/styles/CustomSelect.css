@@ -1,0 +1,98 @@
+.custom-react-select-container .my-react-select__control {
+  background-color: rgb(30, 30, 30); /* Darker background color */
+  border-width: 2px;
+  border-color: #ccc; /* Darker border color */
+  padding: 8px 0px;
+}
+
+.custom-react-select-container .my-react-select__control:hover,
+.custom-react-select-container .my-react-select__control:focus {
+  border-color: #718096; /* Slightly lighter border color on hover/focus */
+  box-shadow: none;
+}
+
+.custom-react-select-container .my-react-select__control--is-focused {
+  border-color: #718096; /* Slightly lighter border color when focused */
+  box-shadow: none;
+}
+
+.custom-react-select-container .my-react-select__menu {
+  background-color: #1f252e; /* Darker background color for menu */
+  border-width: 2px;
+  border-color: #2d3748; /* Darker border color for menu */
+}
+
+.custom-react-select-container .my-react-select__option {
+  color: #cbd5e0; /* Lighter text color for options */
+  background-color: #222831; /* Darker background color for options */
+  padding: 5px 8px;
+}
+
+.custom-react-select-container .my-react-select__option:hover,
+.custom-react-select-container .my-react-select__option:focus {
+  background-color: #2d3748; /* Darker background color on hover/focus */
+}
+
+.custom-react-select-container .my-react-select__option--is-focused {
+  background-color: #2d3748; /* Darker background color when focused */
+}
+
+.custom-react-select-container .my-react-select__indicator-separator {
+  background-color: #718096; /* Slightly lighter color for indicator separator */
+}
+
+.custom-react-select-container .my-react-select__input-container,
+.custom-react-select-container .my-react-select__placeholder,
+.custom-react-select-container .my-react-select__single-value {
+  color: #cbd5e0; /* Lighter text color */
+}
+
+
+@media (prefers-color-scheme: light) {
+  .custom-react-select-container .my-react-select__control {
+    background-color: #fff; /* Replace with your desired color */
+    border-width: 2px;
+    border-color: #cbd5e0; /* Replace with your desired color */
+  }
+  
+  .custom-react-select-container .my-react-select__control:hover,
+  .custom-react-select-container .my-react-select__control:focus {
+    border-color: #a0aec0; /* Replace with your desired color */
+    box-shadow: none;
+  }
+  
+  .custom-react-select-container .my-react-select__control--is-focused {
+    border-color: #a0aec0; /* Replace with your desired color */
+    box-shadow: none;
+  }
+  
+  .custom-react-select-container .my-react-select__menu {
+    background-color: #f7fafc; /* Replace with your desired color */
+    border-width: 2px;
+    border-color: #cbd5e0; /* Replace with your desired color */
+  }
+  
+  .custom-react-select-container .my-react-select__option {
+    color: #4a5568; /* Replace with your desired color */
+    background-color: #f7fafc; /* Replace with your desired color */
+  }
+  
+  .custom-react-select-container .my-react-select__option:hover,
+  .custom-react-select-container .my-react-select__option:focus {
+    background-color: #edf2f7; /* Replace with your desired color */
+  }
+  
+  .custom-react-select-container .my-react-select__option--is-focused {
+    background-color: #edf2f7; /* Replace with your desired color */
+  }
+  
+  .custom-react-select-container .my-react-select__indicator-separator {
+    background-color: #a0aec0; /* Replace with your desired color */
+  }
+  
+  .custom-react-select-container .my-react-select__input-container,
+  .custom-react-select-container .my-react-select__placeholder,
+  .custom-react-select-container .my-react-select__single-value {
+    color: #4a5568; /* Replace with your desired color */
+  }
+}
