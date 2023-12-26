@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
+import { format, startOfMonth, endOfMonth, subMonths } from "date-fns";
 import { Link } from "react-router-dom";
+import qs from "qs";
 
 
 import { get } from "../service";
@@ -26,20 +27,37 @@ const Dashboard = () => {
 
   useEffect(() => {
     document.title = 'Dashboard'; 
-    
-    get(`transactions/?populate=*&sort[0]=date:asc`).then(data => {
+
+    const startOfThreeMonthsAgo = startOfMonth(subMonths(new Date(), 3));
+    const endOfMonthDate = endOfMonth(new Date());
+      
+    const query = qs.stringify({
+      filters: {
+        date: {
+          $gte: format(startOfThreeMonthsAgo, 'yyyy-MM-dd'),
+          $lte: format(endOfMonthDate, 'yyyy-MM-dd'),
+        },
+      },
+      pagination: {
+        limit: 500
+      },
+      populate: '*',
+      sort: ['date:desc'],
+    });
+
+    get(`transactions/?${query}`).then(data => {
       const categTotals = getTotalByCategory(data)
       const dailyTotals = getTotalByDay(data);
       const monthlyTotals = getMonthsTotals(data);
       
-      setLatestTransactions(data.slice(-3))
+      setLatestTransactions(data.slice(0, 3));
       setCategoryTotals(categTotals);
 
       let d = []
       Object.entries(dailyTotals).forEach(([date, total]) => {
         d.push({ name: format(new Date(date), 'dd-MM'), value: total });
       });
-      setData(d);
+      setData(d.slice(0, 10).reverse());
 
       let m = []
       Object.entries(monthlyTotals).forEach(([month, total]) => {
@@ -81,6 +99,8 @@ const Dashboard = () => {
           categoryData={Object.entries(categoryTotals).map(([name, value]) => ({ name, value }))}
           width={screenSize.width * 0.8}
           height={screenSize.height * 0.42}
+          innerRadius={40} 
+          outerRadius={80} 
           colors={["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#653CAD", "#AD653C", "#3CAD65", "#AD3C65", "#653CAD", "#AD653C"]}
         />
       </div>

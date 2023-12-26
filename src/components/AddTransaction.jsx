@@ -41,23 +41,30 @@ const AddTransaction = () => {
   }
 
   const handleSubmit = (values, { resetForm }) => {
-    // Handle form submission here
-
-    if (values.amount && values.currency && values.category) {
+    if (
+      values.amount && 
+      values?.currency?.value && 
+      values?.category?.value &&
+      values.date &&
+      user?.id
+    ) {
+      console.log(user.id);
       const data = {
         data: {
           amount: values.amount,
-          currency: parseInt(values.currency,10),
-          category: parseInt(values.category, 10),
+          currency: parseInt(values.currency.value,10),
+          category: parseInt(values.category.value, 10),
           description: values.description,
           date: values.date,
+          user: parseInt(user.id, 10)
         }
       };
 
       post('transactions', data).then(() => {
         toggleValidationMessage('Transaction added successfully');
         resetForm()
-      }).catch(() => {
+      })
+      .catch(() => {
         toggleValidationMessage('Something went wrong', 'error')
       })
     }

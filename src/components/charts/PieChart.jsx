@@ -2,15 +2,16 @@ import PropTypes from 'prop-types';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 
-const PieChartComponent = ({ categoryData, width, height, colors }) => {
+const PieChartComponent = ({ categoryData, width, height, colors, showLegend, innerRadius, outerRadius }) => {
   return (
     <PieChart width={width} height={height}>
       <Pie
         data={categoryData}
         cx={width / 2}
         cy={height / 2}
-        labelLine={false}
-        outerRadius={80}
+        labelLine={true}
+        innerRadius={innerRadius} 
+        outerRadius={outerRadius} 
         fill="#8884d8"
         dataKey="value"
         label={({ value }) => `${value}`}
@@ -20,10 +21,16 @@ const PieChartComponent = ({ categoryData, width, height, colors }) => {
         }
       </Pie>
       <Tooltip />
-      <Legend />
+      {showLegend && <Legend />}
     </PieChart>
   )
 }
+
+PieChartComponent.defaultProps = {
+  showLegend: false,
+  innerRadius: 0,
+  outerRadius: 80,
+};
 
 PieChartComponent.propTypes = {
   categoryData: PropTypes.arrayOf(
@@ -35,6 +42,9 @@ PieChartComponent.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  showLegend: PropTypes.bool,
+  innerRadius: PropTypes.number,
+  outerRadius: PropTypes.number,
 };
 
 

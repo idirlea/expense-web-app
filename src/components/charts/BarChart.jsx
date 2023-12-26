@@ -38,7 +38,7 @@ const SimpleBarChart = ({ width, height, hideXLabel, hideYLabel, legendLabels, l
     
     return <span style={{ color }}>{legendLabels[value]}</span>;
   }
-  
+
   return layout !== 'vertical' ? (
     <BarChart
       width={width}

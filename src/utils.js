@@ -88,7 +88,10 @@ export const getTotalByDay = (transactions) => {
 export const getTotalByCategory = (transactions) => {
   return transactions.reduce((acc, transaction) => {
     const { category, amount } = transaction;
+    if (!category || !category.data) return acc;
+
     const { attributes: { name } } = category.data || {};
+
     if (!acc[name]) {
       acc[name] = 0;
     }
@@ -99,23 +102,30 @@ export const getTotalByCategory = (transactions) => {
 }
 
 export const getMonthsTotals = (transactions) => {
+  const finalResult = {};
   const groupedTransactions = groupTransactionsByDate(transactions);
-
-  return Object.entries(groupedTransactions).reduce((acc, [date, transactions]) => {
+  
+  
+  const monthlyTotals =  Object.entries(groupedTransactions).reduce((acc, [date, transactions]) => {
     const total = transactions.reduce((acc, transaction) => {
-      return acc + transaction.amount;
+      return acc + Number(transaction.amount); // Ensure amount is a number
     }, 0);
 
     const month = format(new Date(date), 'LLL');
+    
     if (!acc[month]) {
       acc[month] = 0;
     }
-
-    acc[month] += total;
+  
+    acc[month] = acc[month] + total;
+    
     return acc;
   }
   , {});
+
+  Object.entries(monthlyTotals).forEach(([month, total]) => {
+    finalResult[month] = total.toFixed(2);
+  });
+
+  return finalResult;
 }
-
-
-
